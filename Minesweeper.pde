@@ -49,14 +49,11 @@ public void draw ()
 }
 public boolean isWon()
 {
-    for(int i = 0; i < NUM_ROWS; i++)
+    for (int i =0; i< mines.size (); i++) 
     {
-        for(int e = 0; e < NUM_COLS; e++)
+        if (mines.get(i).isFlagged() == false) 
         {
-            if(mines.contains(buttons[i][e]) && buttons[i][e].isClicked())
-            {
-                return false;
-            }
+            return false;
         }
     }
     return true;
@@ -150,31 +147,31 @@ public class MSButton
             {
                 buttons[myRow - 1][myCol - 1].mousePressed();
             }
-            else if(isValid(myRow - 1,myCol) && !buttons[myRow - 1][myCol].isClicked())
+            if(isValid(myRow - 1,myCol) && !buttons[myRow - 1][myCol].isClicked())
             {
                 buttons[myRow - 1][myCol].mousePressed();
             }
-            else if(isValid(myRow - 1,myCol + 1) && !buttons[myRow - 1][myCol+1].isClicked())
+            if(isValid(myRow - 1,myCol + 1) && !buttons[myRow - 1][myCol+1].isClicked())
             {
                 buttons[myRow - 1][myCol + 1].mousePressed();
             }
-            else if(isValid(myRow,myCol - 1) && !buttons[myRow][myCol-1].isClicked())
+            if(isValid(myRow,myCol - 1) && !buttons[myRow][myCol-1].isClicked())
             {
                 buttons[myRow][myCol - 1].mousePressed();
             }
-            else if(isValid(myRow,myCol + 1) && !buttons[myRow][myCol+1].isClicked())
+            if(isValid(myRow,myCol + 1) && !buttons[myRow][myCol+1].isClicked())
             {
                 buttons[myRow][myCol + 1].mousePressed();
             }
-            else if(isValid(myRow + 1,myCol - 1) && !buttons[myRow+1][myCol-1].isClicked())
+            if(isValid(myRow + 1,myCol - 1) && !buttons[myRow+1][myCol-1].isClicked())
             {
                 buttons[myRow + 1][myCol - 1].mousePressed();
             }
-            else if(isValid(myRow + 1,myCol) && !buttons[myRow+1][myCol].isClicked())
+            if(isValid(myRow + 1,myCol) && !buttons[myRow+1][myCol].isClicked())
             {
                 buttons[myRow + 1][myCol].mousePressed();
             }
-            else if(isValid(myRow + 1,myCol + 1) && !buttons[myRow+1][myCol+1].isClicked())
+            if(isValid(myRow + 1,myCol + 1) && !buttons[myRow+1][myCol+1].isClicked())
             {
                 buttons[myRow + 1][myCol + 1].mousePressed();
             }
