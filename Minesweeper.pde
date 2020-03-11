@@ -1,6 +1,7 @@
 import de.bezier.guido.*;
-int NUM_ROWS = 5;
-int NUM_COLS = 5;
+int NUM_ROWS= 16;
+int NUM_COLS = 16;
+boolean gameOver = false;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList <MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -8,12 +9,10 @@ void setup ()
 {
     size(400, 400);
     textAlign(CENTER,CENTER);
-    
     // make the manager
     Interactive.make( this );
     
-    //your code to initialize buttons goes here
-    
+    //your code to initialize buttons goes hereddd
     buttons = new MSButton [NUM_ROWS] [NUM_COLS];
     for(int i = 0; i < NUM_ROWS; i++)
     {
@@ -39,21 +38,31 @@ public void setMines()
 
 public void draw ()
 {
-    background( 0 );
-    if(isWon() == true)
-        displayWinningMessage();
-    else
+    background(0);
+    if(gameOver == true)
     {
-        displayLosingMessage();    
+        if(isWon() == true)
+        {
+            displayWinningMessage();
+            noLoop();
+        }
+        else
+        {
+            displayLosingMessage();  
+            noLoop();  
+        }
     }
 }
 public boolean isWon()
 {
-    for (int i =0; i< mines.size (); i++) 
+    for (int r =0; r< NUM_ROWS; r++) 
     {
-        if (mines.get(i).isFlagged() == false) 
+        for(int c = 0; c < NUM_COLS; c++)
         {
-            return false;
+            if(!mines.contains(buttons[r][c]) && (!buttons[r][c].isClicked() || buttons[r][c].isFlagged()))
+            {
+                return false;
+            }
         }
     }
     return true;
@@ -135,11 +144,11 @@ public class MSButton
         }
         else if(mines.contains(buttons[myRow][myCol]))
         {
-            displayLosingMessage();
+            gameOver = true;
         }
         else if(countMines(myRow, myCol) > 0)
         {
-            myLabel = Integer.toString(countMines(myRow, myCol));
+            myLabel = "" + countMines(myRow, myCol);
         }
         else
         {
@@ -175,6 +184,10 @@ public class MSButton
             {
                 buttons[myRow + 1][myCol + 1].mousePressed();
             }
+        }
+        if(isWon())
+        {
+            gameOver = true;
         }
     }
     public void draw () 
