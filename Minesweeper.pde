@@ -70,12 +70,12 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     textAlign(CENTER, CENTER);
-    System.out.println("Loser");
+    text("Loser", 200, 200);
 }
 public void displayWinningMessage()
 {
     textAlign(CENTER, CENTER);
-    System.out.println("Winner!");
+    text("Winner!", 200, 200);
 }
 public boolean isValid(int r, int c)
 {
